@@ -1,0 +1,394 @@
+@font-face {
+    font-family: "Dealers Solid";
+    src: url("fonts/Dealers - Solid.otf");
+}
+
+/* Menu-ikon */
+
+a {
+    text-decoration: none;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    text-align: center;
+    transition: color 0.3s ease;
+    font-family: "Dealers Solid";
+}
+
+a:hover {
+    color: #FF0000;
+}
+
+#menuToggle {
+    display: block;
+    position: absolute;
+    top: 2vw;
+    left: 2vw;
+    z-index: 1;
+    user-select: none;
+    width: 100%;
+}
+
+#menuToggle input {
+    display: block;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    top: -7px;
+    left: -5px;
+    cursor: pointer;
+    opacity: 0;
+    /* hide this */
+    z-index: 2;
+}
+
+/*Hamburger-ikon*/
+
+#menuToggle span {
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+    background: #FFFFFF;
+    border-radius: 3px;
+    z-index: 1;
+    transform-origin: 4px 0px;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+        background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+        opacity 0.55s ease;
+}
+
+#menuToggle span:first-child {
+    transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2) {
+    transform-origin: 0% 100%;
+}
+
+/* Animation der gør hamburger til et kryds */
+
+#menuToggle input:checked ~ span {
+    opacity: 1;
+    transform: rotate(45deg) translate(-2px, -1px);
+    background: #FFFFFF;
+}
+
+/* Den midterste span skjules */
+
+#menuToggle input:checked ~ span:nth-last-child(3) {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/* Animation der gør hamburger til et kryds */
+
+#menuToggle input:checked ~ span:nth-last-child(2) {
+    transform: rotate(-45deg) translate(0, -1px);
+}
+
+/* Giver menuen en absolut position øverst i venstre side af skærmen */
+
+#menu {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    margin: -100px 0 0 -50px;
+    padding: 50px;
+    padding-top: 125px;
+    background: #000000;
+    list-style-type: none;
+    transform-origin: 0% 0%;
+    transform: translate(-100%, 0);
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+}
+
+#menu li {
+    padding: 10px 0;
+    font-size: 22px;
+    text-align: center;
+}
+
+/* Menuen slider ind fra venstre */
+
+#menuToggle input:checked ~ ul {
+    transform: none;
+}
+
+#menularge {
+    display: inline-block;
+    position: absolute;
+    right: 1em;
+    padding: 1.2em 1em;
+    font-size: 1.5em;
+}
+
+body {
+    margin: 0;
+    background-color: #000000;
+}
+
+.splash {
+    height: 8rem;
+    width: 100%;
+    background-color: #3E3763;
+    align-content: center;
+    position: fixed;
+    top: 0;
+
+}
+
+.splash img {
+    width: 5em;
+    display: block;
+    margin: 0 auto;
+    padding-top: 10px;
+    position: relative;
+}
+
+.logoanchor {
+    width: 5em;
+    display: block;
+    margin: 0 auto;
+    padding-top: 10px;
+    position: relative;
+}
+
+.baggrund {
+    background-image: url('imgs/burger-baggrund.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
+.introtekst {
+    margin: 10rem 2rem;
+}
+
+
+.menu {
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+#menu2 li {
+    display: inline-block;
+    padding: 0 3em;
+}
+
+.valgt {
+    color: #FF0000 !important;
+    text-decoration: underline;
+    border: none;
+}
+
+.liste {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.liste .retter {
+    margin: 1em 5em;
+}
+
+#indhold .retter {
+    margin: 1em 2em;
+}
+
+img {
+    width: 70%;
+    margin: 0 15%;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 0;
+    padding-top: 75px;
+    color: #FFFFFF;
+    font-family: "Dealers Solid";
+    font-weight: 100;
+}
+
+h2 {
+    text-align: center;
+    color: #FFFFFF;
+    font-family: "Dealers Solid";
+    font-weight: 100;
+}
+
+
+h3 {
+    text-align: center;
+    color: #FFFFFF;
+    font-family: "Dealers Solid";
+    font-weight: 100;
+}
+
+p {
+    text-align: center;
+    color: #FFFFFF;
+    font-family: "Dealers Solid";
+    font-weight: 100;
+}
+
+#popup {
+    margin-top: 5em;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background-color: #000000;
+    display: none;
+    overflow: scroll;
+}
+
+#indhold {
+    min-height: 50vh;
+    background-color: #000000;
+    width: 100vw;
+    margin: 4rem auto;
+}
+
+#luk {
+    position: fixed;
+    right: 4rem;
+    padding-right: 2rem;
+}
+
+#luk button {
+    font-size: 2em;
+    margin-top: 4rem;
+    margin-right: 2rem;
+    padding: 0.5em 0.8em;
+    color: #FFFFFF;
+    background-color: #000000;
+    position: absolute;
+    cursor: pointer;
+}
+
+#luk button:hover {
+    color: #ffa500;
+
+}
+
+.filter {
+    font-family: "Dealers Solid";
+    font-size: 0.8em;
+    color: #FFFFFF;
+    background-color: #000000;
+    margin: 0 1em 0 1em;
+    cursor: pointer;
+}
+
+.filter:hover {
+    color: #ffa500;
+}
+
+.retter {
+    border-width: 5px;
+    border: 3px solid #ffa500;
+    padding: 10px;
+    margin: 1em 0.2em;
+}
+
+.kontaktboks {
+    margin-top: 6em;
+    margin-left: 5em;
+    margin-right: 5em;
+    margin-bottom: 2em;
+}
+
+.kontaktinfo {
+    margin: 2em auto;
+}
+
+.aabningstider {
+    margin: 2em auto;
+}
+
+.omboks {
+    margin-top: 6rem;
+    margin-left: 5em;
+    margin-right: 5em;
+    margin-bottom: 2em;
+}
+
+
+.menutekst {
+    margin: 10em 2em 0 2em;
+}
+
+@media only screen and (min-width: 600px) {
+    .liste {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filter {
+        font-size: 1.2em;
+    }
+
+    .liste .retter {
+        margin: 1em 2em;
+    }
+
+    #indhold .retter {
+        margin: 3em 9em;
+
+    }
+
+
+}
+
+@media only screen and (max-width: 999px) {
+    #menularge {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .liste {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .filter {
+        font-size: 1.5em;
+    }
+
+    .liste .retter {
+        margin: 1em;
+    }
+
+    #indhold .retter {
+        margin: 1em 20em;
+
+    }
+
+    .kontaktinfo {
+        display: inline-block;
+        width: 49%;
+    }
+
+    .aabningstider {
+        display: inline-block;
+        width: 49%;
+    }
+
+    #menuToggle {
+        display: none;
+    }
+
+    .splash .logoanchor {
+        display: inline-block;
+        padding-left: 1em;
+        position: absolute;
+    }
+}
+
+@media only screen and (min-width: 1300px) {
+    #indhold .retter {
+        margin: 1em 30em;
+
+    }
+}

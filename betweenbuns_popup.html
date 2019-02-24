@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Between Buns Burgerhouse</title>
+    <link rel="stylesheet" href="betweenbuns_style.css?v=1.6" />
+</head>
+
+<body>
+
+    <div id="popup">
+        <div id="luk">
+            <button>X</button>
+        </div>
+        <div id="indhold"></div>
+    </div>
+
+    <header>
+        <div class="splash">
+            <a class="logoanchor" href="index.html"><img src="imgs/between_buns_logo.png" alt="Between Buns logo"></a>
+            <nav>
+                <div id="menuToggle">
+                    <!-- Skjult checkbox = click reciever-->
+                    <input type="checkbox" />
+
+                    <!--Spans fungerer som hamburger-->
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+
+                    <ul id="menu">
+
+                        <li><a href="betweenbuns_popup.html">Menukort</a></li>
+
+                        <li><a href="betweenbuns_kontakt.html">Kontakt</a></li>
+
+                        <li><a href="betweenbuns_om.html">Om os</a></li>
+
+                    </ul>
+                </div>
+
+                <div id="menularge">
+                    <ul id="menu2">
+                        <li><a href="betweenbuns_popup.html">Menukort</a></li>
+
+                        <li><a href="betweenbuns_kontakt.html">Kontakt</a></li>
+
+                        <li><a href="betweenbuns_om.html">Om os</a></li>
+
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+
+    <div class="menutekst">
+        <h3>Her kan du få et overblik over vores spændende hovedretter, vores sprøde side-orders og vores friske drikkevarer!</h3>
+    </div>
+
+    <div class="menu">
+        <button class="filter" data-hold="hovedretter">Hovedretter</button>
+        <button class="filter" data-hold="side-orders">Side-orders</button>
+        <button class="filter" data-hold="drikkevarer">Drikkevarer</button>
+
+    </div>
+
+    <div class="liste"></div>
+
+
+    <script>
+        let alleRetter = [];
+        /*let filter = "alle";*/
+        const dest = document.querySelector(".liste");
+
+        //Hent JSON-fil i asynkron function
+        async function hentJson() {
+            //Løb personlisten igennem og indsæt data i en template
+            //henter datafilen
+            let jsonData = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1T8Ja-436qxTNHjHxle_5FhPnRLpA71Fq4tOyWW41oDw");
+            console.log(jsonData);
+            // den hentede data skal tolkes som JSON
+            alleRetter = await jsonData.json();
+            console.log(alleRetter);
+
+
+            //kald funktion der viser data i DOM
+            start();
+
+        }
+
+        document.addEventListener("DOMContentLoaded", hentJson);
+
+        function start() {
+            dest.innerHTML = "";
+            alleRetter.forEach(ret => {
+
+                if (filter == "alle" || filter == ret.kategori) {
+                    let template =
+                        //Placer ret i html
+                        `<div class="retter">
+                 <img src="imgs/${ret.billede}.jpg" alt ="${ret.navn}">
+<h2>${ret.navn}</h2>
+<p>${ret.kort}</p>
+<p>${ret.pris} kr.</p>`;
+
+                    dest.insertAdjacentHTML("beforeend", template);
+                    dest.lastElementChild.addEventListener("click", () => {
+                        visSingle(ret);
+                    });
+
+                    function visSingle(ret) {
+                        document.querySelector("#indhold").innerHTML =
+                            `<div class = "retter">
+                            <h2>${ret.navn}</h2>
+<img class = "billede" src ="imgs/${ret.billede}.jpg" alt = "${ret.navn}">
+<p>${ret.kort}</p>
+<p>${ret.pris} kr. </p>
+                            </div>`;
+                        document.querySelector("#popup").style.display = "block";
+                        document.querySelector("#popup #luk").addEventListener("click", close);
+                    }
+
+                    function close() {
+                        document.querySelector("#popup").style.display = "none";
+                    }
+                }
+            });
+
+        }
+
+
+        document.querySelectorAll(".filter").forEach(elm => {
+            elm.addEventListener("click", filtrering);
+
+        })
+
+        function filtrering() {
+            filter = this.getAttribute("data-hold");
+            document.querySelector("h3").textContent = this.textContent;
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.classList.remove("valgt");
+            });
+            this.classList.add("valgt");
+            start();
+        }
+        start();
+
+    </script>
+</body>
+
+</html>
